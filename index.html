@@ -5,30 +5,35 @@
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="reset.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </head>
 <body>
 	<div id="container">
-		<div id="menu-bar">
-			<ul>
-				<li><img src="" alt="shopping-cart"></li>
-				<li><img src="" alt="yelp"></li>
-				<li><img src="" alt="favorites"></li>
-				<li><img src="" alt="social"></li>
-				<li><img src="" alt="email"></li>
-			</ul>
-		</div>
-		<div id="shopping-field">
+		<ul id="menu-bar">
 			<h1>Shopping Bag</h1>
-			<input type="text" name="shopping-item-field" id="input-field">
-			<a href="#" id="instructions"></a>
+			<li><img src="" alt="Cart"></li>
+			<li><img src="" alt="Fav"></li>
+			<li><img src="" alt="Yelp"></li>
+			<li><img src="" alt="Twitter"></li>
+			<li><img src="" alt="Email"></li>
+		</ul>
+		<div id="shopping-field">
+			<input type="text" name="shopping-item-field" id="input-field" value="Enter ...">
+			<button>Add</button>
 		</div>
 		<div id="shopping-bag">
-			<div class="shopping-row"></div>
+			<div class="bag-item">Eggs</div>
+			<div class="bag-item">Milk</div>
+			<div class="bag-item">Bacon</div>			
+			<div class="bag-item">Orange Juice</div>
+			<div class="bag-item">Bread</div>
+			<div class="bag-item">Cheese</div>
 		</div>
-		<div id="footer"></div>
+		<div id="footer"><p>ET2014</p></div>
 	</div>
 </body>
 </html>

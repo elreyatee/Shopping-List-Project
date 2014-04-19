@@ -1,0 +1,76 @@
+body {
+	font-family: 'Droid Sans', sans-serif;
+	color: white;
+}
+
+#container {
+	font-size: 16px;
+	position: relative;
+}
+
+#menu-bar, #footer {
+	display: block;
+	background-image: url('img/LWP64385W.jpeg');
+	background-repeat: repeat-x;
+	text-align: center;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+#footer p {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+h1 {
+	font-family: 'Pacifico', cursive;
+	font-size: 2.5em;
+	font-weight: 300;
+	padding-top: 30px;
+	padding-bottom: 50px;
+}
+
+#menu-bar li {
+	display: inline;
+}
+
+#menu-bar img {
+	display: inline-block;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 20px;
+}
+
+#shopping-field {
+	height: 250px;
+	position: relative;
+	background-color: #5bc1af;
+}
+
+input {
+	font-size: 1.15em;
+	color: #595959;
+	width: 33.3333%;
+	padding: 5px;
+	position: absolute;
+	bottom: 10px;
+	left: 33.3333%;
+	background: #fff;
+	border: 1px solid #c6c9cc;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px #bfbfbf;
+}
+
+.bag-item {
+	padding: 20px;
+	background-image: url('img/paper-bag-background.jpg');
+	background-repeat: repeat-x;
+	display: block;
+}
+
+
