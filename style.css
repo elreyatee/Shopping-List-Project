@@ -29,7 +29,7 @@ body {
 
 h1 {
 	font-family: 'Pacifico', cursive;
-	font-size: 2.5em;
+	font-size: 3em;
 	font-weight: 300;
 	padding-top: 30px;
 	padding-bottom: 50px;
@@ -52,7 +52,7 @@ h1 {
 	background-color: #5bc1af;
 }
 
-input {
+#input-field {
 	font-size: 1.15em;
 	color: #595959;
 	width: 33.3333%;
@@ -64,6 +64,12 @@ input {
 	border: 1px solid #c6c9cc;
 	border-radius: 5px;
 	box-shadow: 0 1px 1px #bfbfbf;
+}
+
+.click-basket {
+	position: absolute;
+	left: 70%;
+	bottom: 0;	
 }
 
 .bag-item {
