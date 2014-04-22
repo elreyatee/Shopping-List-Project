@@ -7,28 +7,27 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
-	<script type="text/javascript" src="jquery.js"</script>
+	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="app.js"></script>
 </head>
 <body>
-	<div id="container">
-		<ul id="menu-bar">
-			<h1>Shopping Bag</h1>
-			<li><img src="img/shopping-cart.svg" alt="Cart"></li>
-			<li><img src="img/favs.svg" alt="Fav"></li>
-			<li><img src="img/yelp.svg" alt="Yelp"></li>
-			<li><img src="img/twitter.svg" alt="Twitter"></li>
-			<li><img src="img/email.svg" alt="Email"></li>
+	<ul id="menu-bar">
+		<h1>Shopping Bag</h1>
+		<li><a href="#"><img src="img/shopping-cart.svg" alt="Cart"><a></li>
+		<li><a href="#"><img src="img/favs.svg" alt="Fav"></a></li>
+		<li><a href="#"><img src="img/yelp.svg" alt="Yelp"></a></li>
+		<li><a href="#"><img src="img/twitter.svg" alt="Twitter"></a></li>
+		<li><a href="#"><img src="img/email.svg" alt="Email"></a></li>
+	</ul>
+	<div id="shopping-field">
+		<ul>
+			<li><input type="text" name="shopping-item-field" id="input-field"></li>
+			<li><a href="#" id="add-item" class="basket-controls"></a><li>
+			<li><a href="#" id="clear-field" class="basket-controls"></a></li>
 		</ul>
-		<div id="shopping-field">
-			<input type="text" name="shopping-item-field" id="input-field">
-			<a class="click-basket" href=""><img src="img/shopping-cart.svg" alt="Cart"></a>
-		</div>
-		<div id="shopping-bag">
-			<div class="bag-item">Test1</div>
-			<div class="bag-item">Test2</div>
-		</div>
-		<div id="footer"><p>ET2014</p></div>
 	</div>
+	<div id="shopping-bag"></div>
+	<div id="footer"><p>ET2014</p></div>
+	<audio id="bag-sound" src="sounds/paper-throw-1.mp3">
 </body>
 </html>

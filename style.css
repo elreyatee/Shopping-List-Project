@@ -1,25 +1,14 @@
 body {
 	font-family: 'Droid Sans', sans-serif;
+	font-size: 16px;
+	position: relative;
 	color: white;
 }
 
-#container {
-	font-size: 16px;
-	position: relative;
-}
-
 #menu-bar, #footer {
-	display: block;
 	background-image: url('img/LWP64385W.jpeg');
 	background-repeat: repeat-x;
 	text-align: center;
-}
-
-#footer {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
 }
 
 #footer p {
@@ -35,48 +24,96 @@ h1 {
 	padding-bottom: 50px;
 }
 
-#menu-bar li {
+#menu-bar li, #shopping-field li {
 	display: inline;
 }
 
 #menu-bar img {
+	width: 40px;
+	height: 40px;
 	display: inline-block;
+	vertical-align: middle;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 20px;
 }
 
 #shopping-field {
-	height: 250px;
-	position: relative;
 	background-color: #5bc1af;
+	text-align: center;
+}
+
+#shopping-field ul {
+	padding-top: 200px;
+	padding-bottom: 20px;
+}
+
+#instructions {
+	width: 40%;
+	font-size: 1.25em;
 }
 
 #input-field {
+	display: inline-block;
 	font-size: 1.15em;
 	color: #595959;
-	width: 33.3333%;
+	width: 30%;
 	padding: 5px;
-	position: absolute;
-	bottom: 10px;
-	left: 33.3333%;
 	background: #fff;
 	border: 1px solid #c6c9cc;
 	border-radius: 5px;
 	box-shadow: 0 1px 1px #bfbfbf;
+	vertical-align: middle;
 }
 
-.click-basket {
-	position: absolute;
-	left: 70%;
-	bottom: 0;	
+.basket-controls {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+#add-item {
+	background: url('img/shopping-cart.svg');
+	background-size: contain;
+	height: 40px;
+	width: 40px;
+}
+
+#clear-field {
+	background: url('img/trash-can.svg');
+	background-size: contain;
+	height: 30px;
+	width: 30px;
+	margin-bottom: 5px;
+}
+
+#input-field, .click-basket {
+	margin-left: 5px;
 }
 
 .bag-item {
-	padding: 20px;
+	padding: 10px;
 	background-image: url('img/paper-bag-background.jpg');
 	background-repeat: repeat-x;
-	display: block;
+	text-align: center;
 }
+
+.bag-item p {
+	display: inline-block;
+	border: 2px dotted white;
+	border-radius: 5px;
+	padding: 10px 15%;
+	vertical-align: middle;
+}
+
+.bag-item p:hover {
+	border: 3px dotted yellow;
+	color: yellow;
+	font-size: 1.25em;
+}
+
+.bag-item a {
+	margin-left: 10px;
+}
+
 
 
