@@ -38,7 +38,7 @@ var oauth = OAuth({
 
 // Request Data
 var request_data = {
-	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll='+geoFindMe(),
+	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll=',
 	method: 'POST',
 	data: {
 		status: 'Hello!'
@@ -59,7 +59,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		var yelpResult = $.ajax({
-				url: request_data.url,
+				url: request_data.url + geoFindMe(),
 				jsonp: 'callback',
 				dataType: 'jsonp',
 				type: request_data.method,
