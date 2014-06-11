@@ -14,7 +14,7 @@ var focusInput = function () {
 	$('#input-field').focus();
 };
 
-var geoFindMe = function() {
+/*var geoFindMe = function() {
 
 	if(!navigator.geolocation) {
 		alert("Geolocation is not supported by your browser!");
@@ -26,7 +26,7 @@ var geoFindMe = function() {
 		latlon = position.coords.latitude + ',' + position.coords.longitude;
 	}
 	navigator.geolocation.getCurrentPosition(success);
-};
+};*/
 
 //Init
 var oauth = OAuth({
@@ -52,11 +52,24 @@ var token = {
 	secret: 'K9AQEMBhDeC-ZeYY--QvZAprk0o'
 };
 
+$(document).ajaxSend(function() {
+
+	if(!navigator.geolocation) {
+		alert("Geolocation is not supported by your browser!");
+		return;
+	}
+ 
+	var success = function(position) {
+		console.log("Latitude: " + position.coords.latitude + " & Longitude: " + position.coords.longitude);
+		latlon = position.coords.latitude + ',' + position.coords.longitude;
+	}
+	navigator.geolocation.getCurrentPosition(success);
+});
+
 $(document).ready(function() {
 
 	$('#menu-bar').on('click', 'li a img[alt="Yelp"]', function(event) {
 		event.preventDefault();
-		geoFindMe();
 
 		var yelpResult = $.ajax({
 				url: request_data.url,
