@@ -1,19 +1,3 @@
-window.onload = function() {
-	if(navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(showPosition);
-	}
-	else {
-		alert("Geolocation is not supported by your browser!");
-	}
-};
-
-var latlon;
-
-var showPosition = function (position) {
-	console.log("Latitude: " + position.coords.latitude + " & Longitude: " + position.coords.longitude);
-	latlon = position.coords.latitude + ',' + position.coords.longitude;	
-};
-
 var playPapersound = function () {
 	$('#bag-sound')[0].volume = 0.5;
 	$('#bag-sound')[0].load();
@@ -28,6 +12,21 @@ var focusInput = function () {
 	$('#input-field').focus();
 };
 
+var geoFindMe = function() {
+
+	if(!navigator.geolocation) {
+		alert("Geolocation is not supported by your browser!");
+		return;
+	}
+ 
+	var success = function(position) {
+		console.log("Latitude: " + position.coords.latitude + " & Longitude: " + position.coords.longitude);
+		var latlon = position.coords.latitude + ',' + position.coords.longitude;
+	}
+	navigator.geolocation.getCurrentPosition(success);
+	return latlon;
+};
+
 //Init
 var oauth = OAuth({
 	consumer: {
@@ -39,12 +38,14 @@ var oauth = OAuth({
 
 // Request Data
 var request_data = {
-	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll='+latlon,
+	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll='+geoFindMe(),
 	method: 'POST',
 	data: {
 		status: 'Hello!'
 	}
 };
+
+console.log(request_data.url);
 
 // Token info
 var token = {
@@ -56,6 +57,7 @@ $(document).ready(function() {
 
 	$('#menu-bar').on('click', 'li a img[alt="Yelp"]', function(event) {
 		event.preventDefault();
+
 		var yelpResult = $.ajax({
 				url: request_data.url,
 				jsonp: 'callback',
