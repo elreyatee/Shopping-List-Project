@@ -12,6 +12,7 @@ var focusInput = function () {
 	$('#input-field').focus();
 };
 
+/*
 var getURL = function() {
 
 	if(!navigator.geolocation) {
@@ -25,7 +26,7 @@ var getURL = function() {
 	}
 
 	navigator.geolocation.getCurrentPosition(success);
-};
+};*/
 
 //Init
 var oauth = OAuth({
@@ -38,7 +39,7 @@ var oauth = OAuth({
 
 // Request Data
 var request_data = {
-	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll=San+Francisco',
+	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&location=San+Francisco',
 	method: 'POST',
 	data: {
 		status: 'Hello!'
@@ -58,8 +59,6 @@ $(document).ready(function() {
 
 		var yelpResult = $.ajax({
 				url: request_data.url,
-				jsonp: 'callback',
-				dataType: 'jsonp',
 				type: request_data.method,
 				data: oauth.authorize(request_data, token)
 			}).done(function(data) {
