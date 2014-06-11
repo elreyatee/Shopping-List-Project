@@ -22,7 +22,6 @@ var getURL = function() {
 	var success = function(position) {
 		console.log("Latitude: " + position.coords.latitude + " & Longitude: " + position.coords.longitude);
 		latlon = position.coords.latitude + ',' + position.coords.longitude;
-		return 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll='+latlon;
 	}
 
 	navigator.geolocation.getCurrentPosition(success);
@@ -39,7 +38,7 @@ var oauth = OAuth({
 
 // Request Data
 var request_data = {
-	url: getURL, /*'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll='+latlon,*/
+	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&ll=San+Francisco',
 	method: 'POST',
 	data: {
 		status: 'Hello!'
