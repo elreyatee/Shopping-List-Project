@@ -60,6 +60,8 @@ $(document).ready(function() {
 		var yelpResult = $.ajax({
 				url: request_data.url,
 				type: request_data.method,
+				jsonp: 'callback',
+				dataType: 'jsonp',
 				data: oauth.authorize(request_data, token)
 			}).done(function(data) {
 				console.log('success!');
