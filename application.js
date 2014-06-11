@@ -13,7 +13,7 @@ var focusInput = function () {
 };
 
 var geoFindMe = function() {
-
+	var latlon;
 	if(!navigator.geolocation) {
 		alert("Geolocation is not supported by your browser!");
 		return;
@@ -21,7 +21,7 @@ var geoFindMe = function() {
  
 	var success = function(position) {
 		console.log("Latitude: " + position.coords.latitude + " & Longitude: " + position.coords.longitude);
-		var latlon = position.coords.latitude + ',' + position.coords.longitude;
+		latlon = position.coords.latitude + ',' + position.coords.longitude;
 	}
 	navigator.geolocation.getCurrentPosition(success);
 	return latlon;
