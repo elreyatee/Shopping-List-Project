@@ -59,7 +59,7 @@ $(document).ready(function() {
 		event.preventDefault();
 
 		var yelpResult = $.ajax({
-				url: request_data.url + geoFindMe(),
+				url: request_data.url + geoFindMe,
 				jsonp: 'callback',
 				dataType: 'jsonp',
 				type: request_data.method,
