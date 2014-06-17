@@ -12,22 +12,6 @@ var focusInput = function () {
 	$('#input-field').focus();
 };
 
-/*
-var getURL = function() {
-
-	if(!navigator.geolocation) {
-		alert("Geolocation is not supported by your browser!");
-		return;
-	}
- 
-	var success = function(position) {
-		console.log("Latitude: " + position.coords.latitude + " & Longitude: " + position.coords.longitude);
-		latlon = position.coords.latitude + ',' + position.coords.longitude;
-	}
-
-	navigator.geolocation.getCurrentPosition(success);
-};*/
-
 //Init
 var oauth = OAuth({
 	consumer: {
@@ -39,11 +23,8 @@ var oauth = OAuth({
 
 // Request Data
 var request_data = {
-	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&location=San+Francisco',
-	method: 'POST',
-	data: {
-		status: 'Hello!'
-	}
+	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&location=Oakland',
+	method: 'POST'
 };
 
 // Token info
@@ -57,14 +38,14 @@ $(document).ready(function() {
 	$('#menu-bar').on('click', 'li a img[alt="Yelp"]', function(event) {
 		event.preventDefault();
 
-		var yelpResult = $.ajax({
+		/*var yelpResult = */
+		$.ajax({
 				url: request_data.url,
+				cache: true,
 				type: request_data.method,
-				jsonp: 'callback',
 				dataType: 'jsonp',
-				data: oauth.authorize(request_data, token)
-			}).done(function(data) {
-				console.log('success!');
+				data: oauth.authorize(request_data, token),
+				success: function(data) {console.log('success!');}
 		});
 	});
 
