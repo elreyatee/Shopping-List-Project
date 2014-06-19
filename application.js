@@ -34,18 +34,23 @@ $(document).ready(function() {
 	$('#menu-bar').on('click', 'li a img[alt="Foursquare"]', function(event) {
 		event.preventDefault();
 
+		// Data we are requesting from Foursquare
+		var request = {
+				'categories': 'Grocery Store'
+		}
+
 		var foursquare = $.ajax({
 				url: 'http://api.foursquare.com/v2/venues/search?ll=' + latitude + ',' + longitude +
 					 '&limit=10&client_id=HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3&' +
 					 'client_secret=SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG&v=20140619',
+				data: request,
 				dataType: 'jsonp',
-				data: {
-					'id': '4bf58dd8d48988d118951735'
-				},
-				success: function(data) {
+				data: request,
+				success: function(result) {
 					console.log('success!');
-					console.log(data);
 				}
+		}).done(function(result) {
+			console.log(result.response.venues);
 		});
 	});
 
