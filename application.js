@@ -36,15 +36,15 @@ $(document).ready(function() {
 
 		var foursquare = $.ajax({
 				url: 'http://api.foursquare.com/v2/venues/search?ll=' + latitude + ',' + longitude +
-					 'client_id=HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3&' +
+					 '&limit=10&client_id=HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3&' +
 					 'client_secret=SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG&v=20140619',
 				dataType: 'jsonp',
 				data: {
-					'id': '4bf58dd8d48988d118951735',
-					'name': 'Grocery Store',
+					'id': '4bf58dd8d48988d118951735'
 				},
 				success: function(data) {
 					console.log('success!');
+					console.log(data);
 				}
 		});
 	});
