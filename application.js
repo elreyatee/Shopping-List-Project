@@ -12,40 +12,40 @@ var focusInput = function () {
 	$('#input-field').focus();
 };
 
-//Init
-var oauth = OAuth({
-	consumer: {
-		public: 'kV4eJDAd5AFOzGyMYhQpyQ',
-		secret: 'olcIRixTohwU94qouGwV4VEcn9E'
-	},
-	signature_method: 'HMAC-SHA1'
-});
+var latitude, longitude;
 
-// Request Data
-var request_data = {
-	url: 'http://api.yelp.com/v2/search?term=grocery&limit=5&sort=2&location=Oakland',
-	method: 'POST'
+var showPosition = function(position) {
+	latitude = position.coords.latitude;
+	longitude = position.coords.longitude;
 };
 
-// Token info
-var token = {
-	public: 'zM2_GgTAJTV1KwIwp7iC1FPBtObaTYKw',
-	secret: 'K9AQEMBhDeC-ZeYY--QvZAprk0o'
-};
+if(navigator.geolocation) {
+	navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+	alert('Geolocation not supported!');
+}
+
+/*'https://api.foursquare.com/v2/venues/categories?id=4bf58dd8d48988d118951735&' + 
+					'client_id=HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3&' +
+					'client_secret=SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG&v=20140618'*/
 
 $(document).ready(function() {
 
-	$('#menu-bar').on('click', 'li a img[alt="Yelp"]', function(event) {
+	$('#menu-bar').on('click', 'li a img[alt="Foursquare"]', function(event) {
 		event.preventDefault();
 
-		/*var yelpResult = */
-		$.ajax({
-				url: request_data.url,
-				cache: true,
-				type: request_data.method,
+		var foursquare = $.ajax({
+				url: 'http://api.foursquare.com/v2/venues/search?ll=' + latitude + ',' + longitude +
+					 'client_id=HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3&' +
+					 'client_secret=SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG&v=20140619',
 				dataType: 'jsonp',
-				data: oauth.authorize(request_data, token),
-				success: function(data) {console.log('success!');}
+				data: {
+					'id': '4bf58dd8d48988d118951735',
+					'name': 'Grocery Store',
+				},
+				success: function(data) {
+					console.log('success!');
+				}
 		});
 	});
 
