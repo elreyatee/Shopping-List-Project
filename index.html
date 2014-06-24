@@ -20,6 +20,27 @@
 		<li><a href="#"><img src="img/twitter.svg" alt="Twitter"></a></li>
 		<li><a href="#"><img src="img/email.svg" alt="Email"></a></li>
 	</ul>
+	<div id="hidden" class="address_bar">
+		<form class="address_getter">
+			<input type="text" placeholder="Type address here ..." size="50" name="address" required>
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+	<div id="hidden template" class="results_window">
+		<dl class="results">
+			<dt>Store name:</dt>
+				<dd class="store_name"></dd>
+			<dt>Address:</dt>
+				<dd class="store_address"></dd>
+			<dt>City:</dt>
+				<dd class="store_city"></dd>
+			<dt>Phone number:</dt>
+				<dd class="store_phone"></dd>
+			<dt>Distance:</dt>
+				<dd class="store_distance"></dd>
+		</dl>
+	</div>
+	<div class="results-container"></div>
 	<div id="shopping-field">
 		<ul>
 			<li><input type="text" name="shopping-item-field" id="input-field"></li>

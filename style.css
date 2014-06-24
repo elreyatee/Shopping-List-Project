@@ -38,6 +38,17 @@ h1 {
 	margin-bottom: 20px;
 }
 
+.results-container {
+	text-align: center;
+}
+
+.results {
+	color: black;
+	display: inline-block;
+	padding: 10px 25px;
+	vertical-align: center;
+}
+
 #shopping-field {
 	background-color: #5bc1af;
 	text-align: center;
@@ -53,17 +64,24 @@ h1 {
 	font-size: 1.25em;
 }
 
-#input-field {
+#input-field, input[type='text'] {
 	display: inline-block;
 	font-size: 1.15em;
 	color: #595959;
-	width: 30%;
 	padding: 5px;
 	background: #fff;
 	border: 1px solid #c6c9cc;
 	border-radius: 5px;
 	box-shadow: 0 1px 1px #bfbfbf;
 	vertical-align: middle;
+}
+
+#input-field {
+	width: 30%;
+}
+
+input[type='text'] {
+	width: 25%
 }
 
 .basket-controls {
@@ -88,6 +106,13 @@ h1 {
 
 #input-field, .click-basket {
 	margin-left: 5px;
+}
+
+.address_bar {
+	text-align: center;
+	padding: 10px;
+	background-image: url('img/LWP64385W.jpeg');
+	background-repeat: repeat-x;
 }
 
 .bag-item {
