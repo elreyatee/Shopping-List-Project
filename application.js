@@ -30,6 +30,7 @@ var getLocalStores = function () {
 
 	$('.address_getter').submit(function(event) {
 		event.preventDefault();
+
 		var address = $(this).serialize();
 
 		//Get Geocode from user input using Google API
@@ -53,10 +54,8 @@ var getLocalStores = function () {
 						   v: '20140623'},
 					dataType: 'jsonp',
 				}).done(function(foursquare) {
-
-					//console.log(foursquare);
+					
 					var ven = foursquare.response.venues;
-					//console.log(ven);
 					var result = [];
 					
 					for(var i = 0; i < ven.length; i++) {
@@ -67,8 +66,13 @@ var getLocalStores = function () {
 
 						})(i);
 					}
+
 					$('.results-container').append(result);
 					$('.results-container').slideDown('fast');
+					//clear result variable
+					result.length = 0;
+					console.log(foursquare);
+					console.log(result.length);
 				});
 			}
 		});
@@ -83,7 +87,8 @@ $(document).ready(function() {
 
 	$('#menu-bar').on('click', 'li a img[alt="Foursquare"]', function(event) {
 		event.preventDefault();
-		$('.address_bar').slideToggle("fast");
+		$('.address_bar').slideToggle('fast');
+		$('.results-container').empty();
 		getLocalStores();
 	});
 
