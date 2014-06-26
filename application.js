@@ -28,10 +28,13 @@ var showResults = function(query) {
 
 var getLocalStores = function () {
 
-	$('.address_getter').submit(function(event) {
-		event.preventDefault();
+	//$('.address_getter').submit(function(event) {         
+		//event.preventDefault();
 
-		var address = $(this).serialize();
+		$('.results-container').empty().delay(1000);
+
+		//var address = $(this).serialize(); 
+		var address = $('.address_getter').serialize();
 
 		//Get Geocode from user input using Google API
 		$.ajax({
@@ -54,7 +57,7 @@ var getLocalStores = function () {
 						   v: '20140623'},
 					dataType: 'jsonp',
 				}).done(function(foursquare) {
-					
+
 					var ven = foursquare.response.venues;
 					var result = [];
 					
@@ -69,14 +72,14 @@ var getLocalStores = function () {
 
 					$('.results-container').append(result);
 					$('.results-container').slideDown('fast');
-					//clear result variable
+					//clear 'result' variable
 					result.length = 0;
 					console.log(foursquare);
 					console.log(result.length);
 				});
 			}
 		});
-	});
+	//});
 };
 
 $(document).ready(function() {
@@ -85,11 +88,26 @@ $(document).ready(function() {
 	$('.results_window').hide();
 	$('.results-container').hide();
 
+	// Click on Foursquare icon to show address bar
 	$('#menu-bar').on('click', 'li a img[alt="Foursquare"]', function(event) {
 		event.preventDefault();
 		$('.address_bar').slideToggle('fast');
-		$('.results-container').empty();
-		getLocalStores();
+
+		// Submit address if click 'SUBMIT' button or press 'ENTER' key
+		if($('.address_bar').css('display') !== 'none') {
+			$('.address_getter').on('submit', function(event) {
+				event.preventDefault();
+				getLocalStores();
+			});
+
+			$('.address_getter').on('keyup', function(event){
+				if(event.keycode === 13 ) {
+					event.preventDefault();
+					getLocalStores();
+				}
+			});
+		}
+		//getLocalStores();
 	});
 
 	focusInput();
@@ -112,6 +130,7 @@ $(document).ready(function() {
 		} else {
 			alert('Please enter an item');
 		}
+
 		$('.bag-item a').on('click', function() {
 			$(this).closest('.bag-item').remove();
 			focusInput();
