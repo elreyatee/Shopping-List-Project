@@ -74,19 +74,23 @@ function getLocalStores () {
 
 $(document).ready(function() {
 
-	$('.address_bar').hide();
-	$('.results_window').hide();
-	$('.results-container').hide();
+	var addressBar = $('.address_bar');
+	var addressGet = $('.address_getter');
+	var container = $('.results-container');
+
+	addressBar.hide();
+	container.hide();
 
 	// Click on Foursquare icon to show address bar
 	$('#menu-bar').on('click', 'li a img[alt="Foursquare"]', function(event) {
 		event.preventDefault();
-		$('.address_bar').slideToggle('fast');
+		addressBar.slideToggle('fast');
 		clearResults();
+		$('input[type="text"]').val('');
 	});
 
 	// Submit information by 'ENTER' key or click 'SUBMIT'
-	$('.address_getter').on({
+	addressGet.on({
 		'submit': function(event){
 			event.preventDefault();
 			getLocalStores();

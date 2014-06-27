@@ -1,0 +1,33 @@
+/*.foursquare_logo2, .foursquare_logo2_yellow{
+	background: url(img/sprites.png) no-repeat;
+}
+
+.foursquare_logo2{
+	background-position: 0 0;
+	width: 50px;
+	height: 50px;
+}
+
+.foursquare_logo2_yellow{
+	background-position: -50px 0;
+	width: 50px;
+	height: 50px;
+}*/
+
+#menu-bar > a[alt="Foursquare"], #menu-bar > a[alt="Foursquare"]:hover {
+	background: url(img/sprites.png) no-repeat;
+	width: 50px;
+	height: 50px;
+	display: inline-block;
+}
+	
+#menu-bar > a[alt="Foursquare"] {
+	background-position: 0 0;
+}
+
+#menu-bar > a[alt="Foursquare"]:hover {
+	background-position: -50px 0;
+}
+
+
+

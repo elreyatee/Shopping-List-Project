@@ -54,6 +54,10 @@ h1 {
 	font-size: 0.80em;
 }
 
+.results_window {
+	display: none;
+}
+
 #shopping-field {
 	background-color: #5bc1af;
 	text-align: center;
