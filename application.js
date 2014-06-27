@@ -86,7 +86,7 @@ $(document).ready(function() {
 		event.preventDefault();
 		addressBar.slideToggle('fast');
 		clearResults();
-		$('input[type="text"]').val('');
+		$('input[name="address"]').val('');
 	});
 
 	// Submit information by 'ENTER' key or click 'SUBMIT'
