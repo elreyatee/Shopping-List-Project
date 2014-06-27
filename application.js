@@ -1,18 +1,15 @@
-var playPapersound = function () {
-	$('#bag-sound')[0].volume = 0.5;
-	$('#bag-sound')[0].load();
-	$('#bag-sound')[0].play();
-};
+function playPapersound() {
+	var bagsound = $('#bag-sound');
+	bagsound[0].volume = 0.5;
+	bagsound[0].load();
+	bagsound[0].play();
+}
 
-var clearField = function () {
-	$('#input-field').val('');
-};
+function clearField() { $('#input-field').val(''); }
 
-var focusInput = function () {
-	$('#input-field').focus();
-};
+function focusInput() { $('#input-field').focus(); }
 
-var showResults = function(query) {
+function showResults(query) {
 	
 	var clone = $('.results').clone();
 	
@@ -20,72 +17,60 @@ var showResults = function(query) {
 	$(clone).find('dd[class="store_address"]').text(query.location.address);
 	$(clone).find('dd[class="store_city"]').text(query.location.city);
 	$(clone).find('dd[class="store_phone"]').text(query.contact.formattedPhone);
+
 	//1 meter = 0.000621371 miles
 	$(clone).find('dd[class="store_distance"]').text((query.location.distance * 0.000621371).toFixed(2) + ' miles away');
 
 	return clone;
-};
+}
 
-var clearResults = function() {
-	$('.results-container').empty().delay(1000);
-};
+function clearResults() { $('.results-container').slideUp('fast').empty(); }
 
-var getLocalStores = function () {
+function getLocalStores () {
 
 	clearResults();
-
 	var address = $('.address_getter').serialize();
+	var googleURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='+ address;
 
-	//Get Geocode from user input using Google API
-	$.ajax({
-		url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + 
-			 '&key=AIzaSyBgvHM6ssIauA7ifScJja7-om1KzGoVnSs',
-		success: function(result) {
-			// Extract geocoordinates from resulting data
-			var latitude = result.results[0].geometry.location.lat;
-			var longitude = result.results[0].geometry.location.lng;
+	$.when(
 
-			// Convert results to a string
-			latitude.toString();
-			longitude.toString();
+		//Get Geocode from user input using Google API
+		$.getJSON(googleURL, { key: 'AIzaSyBgvHM6ssIauA7ifScJja7-om1KzGoVnSs'}
 
-			// Coordinate string for URL
-			var coordinates = latitude + ',' + longitude;
+	)).then(function(data) {
 
-			// Data we are requesting from Foursquare
-			var foursquare = $.ajax({
-				url: 'http://api.foursquare.com/v2/venues/search?ll=' + coordinates,
-				data: {categoryId: '4bf58dd8d48988d118951735',
-					   limit: '5',
-					   client_id: 'HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3',
-					   client_secret: 'SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG',
-					   v: '20140623'},
-				dataType: 'jsonp',
-			}).done(function(foursquare) {
+		//Then pass coordinates to Foursquare API call
+		var latitude = (data.results[0].geometry.location.lat).toString();
+		var longitude = (data.results[0].geometry.location.lng).toString();
 
-				var ven = foursquare.response.venues;
-				var result = [];
-				
-				// Load data into an array - creates array of objects
-				for(var i = 0; i < ven.length; i++) {
-					//This is a closure
-					(function(index) {
-						
-						result[index] = showResults(ven[index]);
+		$.ajax({
+			url: 'http://api.foursquare.com/v2/venues/search?ll=' + latitude + ',' + longitude,
+			data: {categoryId: '4bf58dd8d48988d118951735',
+				   limit: '5',
+				   client_id: 'HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3',
+				   client_secret: 'SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG',
+				   radius: '16000',
+				   v: '20140623'},
+			dataType: 'jsonp',
+		}).done(function(data) {
 
-					})(i);
-				}
+			var venue = data.response.venues, resultArr = [];
+	
+			// Load data into an array - creates array of objects
+			for(var i = 0; i < venue.length; i++) {
+				//This is a closure
+				(function(index) {
+					
+					//fsq_result[index] = showResults(ven[index]);
+					resultArr.push(showResults(venue[index]));
 
-				//Load results into container and slidedown to show to viewer
-				$('.results-container').append(result);
-				$('.results-container').slideDown('fast');
-
-				//clear 'result' variable
-				result.length = 0;
-			});
-		}
+				})(i);
+			}
+			//Load results into container and slidedown to show to viewer
+			$('.results-container').append(resultArr).slideDown('fast');
+		});
 	});
-};
+}
 
 $(document).ready(function() {
 
@@ -97,21 +82,21 @@ $(document).ready(function() {
 	$('#menu-bar').on('click', 'li a img[alt="Foursquare"]', function(event) {
 		event.preventDefault();
 		$('.address_bar').slideToggle('fast');
+		clearResults();
+	});
 
-		// Submit address if click 'SUBMIT' button or press 'ENTER' key
-		if($('.address_bar').css('display') !== 'none') {
-			$('.address_getter').on('submit', function(event) {
+	// Submit information by 'ENTER' key or click 'SUBMIT'
+	$('.address_getter').on({
+		'submit': function(event){
+			event.preventDefault();
+			getLocalStores();
+		},
+		'keyup': function(event){
+			if(event.keycode === 13 ) {
 				event.preventDefault();
 				getLocalStores();
-			});
-
-			$('.address_getter').on('keyup', function(event){
-				if(event.keycode === 13 ) {
-					event.preventDefault();
-					getLocalStores();
-				}
-			});
-		} 
+			}
+		}
 	});
 
 	focusInput();
