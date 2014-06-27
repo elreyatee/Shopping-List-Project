@@ -26,60 +26,65 @@ var showResults = function(query) {
 	return clone;
 };
 
+var clearResults = function() {
+	$('.results-container').empty().delay(1000);
+};
+
 var getLocalStores = function () {
 
-	//$('.address_getter').submit(function(event) {         
-		//event.preventDefault();
+	clearResults();
 
-		$('.results-container').empty().delay(1000);
+	var address = $('.address_getter').serialize();
 
-		//var address = $(this).serialize(); 
-		var address = $('.address_getter').serialize();
+	//Get Geocode from user input using Google API
+	$.ajax({
+		url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + 
+			 '&key=AIzaSyBgvHM6ssIauA7ifScJja7-om1KzGoVnSs',
+		success: function(result) {
+			// Extract geocoordinates from resulting data
+			var latitude = result.results[0].geometry.location.lat;
+			var longitude = result.results[0].geometry.location.lng;
 
-		//Get Geocode from user input using Google API
-		$.ajax({
-			url: 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=AIzaSyBgvHM6ssIauA7ifScJja7-om1KzGoVnSs',
-			success: function(result) {
-				var latitude = result.results[0].geometry.location.lat;
-				var longitude = result.results[0].geometry.location.lng;
-				latitude.toString();
-				longitude.toString();
+			// Convert results to a string
+			latitude.toString();
+			longitude.toString();
 
-				var coordinates = latitude + ',' + longitude;
+			// Coordinate string for URL
+			var coordinates = latitude + ',' + longitude;
 
-				// Data we are requesting from Foursquare
-				var foursquare = $.ajax({
-					url: 'http://api.foursquare.com/v2/venues/search?ll=' + coordinates,
-					data: {categoryId: '4bf58dd8d48988d118951735',
-						   limit: '5',
-						   client_id: 'HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3',
-						   client_secret: 'SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG',
-						   v: '20140623'},
-					dataType: 'jsonp',
-				}).done(function(foursquare) {
+			// Data we are requesting from Foursquare
+			var foursquare = $.ajax({
+				url: 'http://api.foursquare.com/v2/venues/search?ll=' + coordinates,
+				data: {categoryId: '4bf58dd8d48988d118951735',
+					   limit: '5',
+					   client_id: 'HNXJ1F11JAIGT35BBDTOVWVCBJZFL3KCFPQ4ROQAYDI2K1S3',
+					   client_secret: 'SUGSAPYIMQJATTX41EOIJ4T3QML21I5V15HXNJLL0BKT54BG',
+					   v: '20140623'},
+				dataType: 'jsonp',
+			}).done(function(foursquare) {
 
-					var ven = foursquare.response.venues;
-					var result = [];
-					
-					for(var i = 0; i < ven.length; i++) {
-						//This is a closure
-						(function(index) {
-							
-							result[index] = showResults(ven[index]);
+				var ven = foursquare.response.venues;
+				var result = [];
+				
+				// Load data into an array - creates array of objects
+				for(var i = 0; i < ven.length; i++) {
+					//This is a closure
+					(function(index) {
+						
+						result[index] = showResults(ven[index]);
 
-						})(i);
-					}
+					})(i);
+				}
 
-					$('.results-container').append(result);
-					$('.results-container').slideDown('fast');
-					//clear 'result' variable
-					result.length = 0;
-					console.log(foursquare);
-					console.log(result.length);
-				});
-			}
-		});
-	//});
+				//Load results into container and slidedown to show to viewer
+				$('.results-container').append(result);
+				$('.results-container').slideDown('fast');
+
+				//clear 'result' variable
+				result.length = 0;
+			});
+		}
+	});
 };
 
 $(document).ready(function() {
@@ -106,8 +111,7 @@ $(document).ready(function() {
 					getLocalStores();
 				}
 			});
-		}
-		//getLocalStores();
+		} 
 	});
 
 	focusInput();

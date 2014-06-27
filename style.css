@@ -11,6 +11,10 @@ body {
 	text-align: center;
 }
 
+#menu-bar {
+	height: 200px;
+}
+
 #footer p {
 	padding-top: 20px;
 	padding-bottom: 20px;
